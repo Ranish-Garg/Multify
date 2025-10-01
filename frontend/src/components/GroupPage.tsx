@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Page } from '../App';
 import GroupOverview from './GroupOverview';
 import GroupProposals from './GroupProposals';
 import GroupTransactions from './GroupTransactions';
 import { ArrowLeft } from 'lucide-react';
+import { useWallet } from '../contexts/WalletContext';
 
 interface GroupPageProps {
   groupId: string | null;
   onNavigate: (page: Page) => void;
-  connectedWallet: string;
 }
 
 type GroupTab = 'overview' | 'proposals' | 'transactions';
@@ -28,7 +28,8 @@ const mockGroup = {
   ]
 };
 
-function GroupPage({ groupId, onNavigate, connectedWallet }: GroupPageProps) {
+function GroupPage({ groupId, onNavigate }: GroupPageProps) {
+  // const { walletAddress } = useWallet(); // Available for future use
   const [activeTab, setActiveTab] = useState<GroupTab>('overview');
 
   if (!groupId) {
@@ -54,13 +55,13 @@ function GroupPage({ groupId, onNavigate, connectedWallet }: GroupPageProps) {
   const renderTabContent = () => {
     switch (activeTab) {
       case 'overview':
-        return <GroupOverview group={mockGroup} connectedWallet={connectedWallet} />;
+        return <GroupOverview group={mockGroup} />;
       case 'proposals':
-        return <GroupProposals group={mockGroup} connectedWallet={connectedWallet} />;
+        return <GroupProposals group={mockGroup} />;
       case 'transactions':
         return <GroupTransactions group={mockGroup} />;
       default:
-        return <GroupOverview group={mockGroup} connectedWallet={connectedWallet} />;
+        return <GroupOverview group={mockGroup} />;
     }
   };
 

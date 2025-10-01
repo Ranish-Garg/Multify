@@ -1,5 +1,5 @@
-import React from 'react';
 import { Users, Shield, Wallet, Plus } from 'lucide-react';
+import { useWallet } from '../contexts/WalletContext';
 
 interface Group {
   id: string;
@@ -13,16 +13,16 @@ interface Group {
 
 interface GroupOverviewProps {
   group: Group;
-  connectedWallet: string;
 }
 
-function GroupOverview({ group, connectedWallet }: GroupOverviewProps) {
+function GroupOverview({ group }: GroupOverviewProps) {
+  const { walletAddress } = useWallet();
   const formatAddress = (address: string) => {
     return `${address.slice(0, 6)}...${address.slice(-4)}`;
   };
 
   const isCurrentUser = (address: string) => {
-    return address.toLowerCase() === connectedWallet.toLowerCase();
+    return address.toLowerCase() === walletAddress.toLowerCase();
   };
 
   return (

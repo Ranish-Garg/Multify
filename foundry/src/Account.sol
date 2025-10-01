@@ -23,7 +23,6 @@ contract Account is IAccount
     address[] owners;
     uint256 threshold;
     mapping (address => bool) public isowner;
-    mapping (bytes32 => mapping(address => bool)) public isConfirmed;
     proposal[] public proposals;
 
     address private _currentProposer;
@@ -73,7 +72,7 @@ contract Account is IAccount
          if(selector ==this.executetransaction.selector)
          {
             require(numberofsigners == threshold, "a threshold is required to execute the transaction");
-            for(uint i=0;i<=numberofsigners;i++)
+            for(uint i=0;i<numberofsigners;i++)
             {
                  bytes memory signersig = userOp.signature[65*i:65*(i+1)];
                 bytes32 ethsignedHash = MessageHashUtils.toEthSignedMessageHash(userOpHash);
@@ -87,9 +86,10 @@ contract Account is IAccount
                     revert("Signature not from an owner");
                 }
 
-                require(flag>=threshold,"Not enough valid signatures");
-                return 0;
+               
             }
+             require(flag>=threshold,"Not enough valid signatures");
+            return 0;
 
          }
             return 1;

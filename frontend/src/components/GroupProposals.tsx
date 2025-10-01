@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Plus, Send, CheckCircle, XCircle, Clock } from 'lucide-react';
 import ProposalCard from './ProposalCard';
 import CreateProposalModal from './CreateProposalModal';
+import { useWallet } from '../contexts/WalletContext';
 
 interface Group {
   id: string;
@@ -15,7 +16,6 @@ interface Group {
 
 interface GroupProposalsProps {
   group: Group;
-  connectedWallet: string;
 }
 
 // Mock proposals data
@@ -58,7 +58,8 @@ const mockProposals = [
   }
 ];
 
-function GroupProposals({ group, connectedWallet }: GroupProposalsProps) {
+function GroupProposals({ group }: GroupProposalsProps) {
+  const { walletAddress } = useWallet();
   const [showCreateModal, setShowCreateModal] = useState(false);
 
   const pendingProposals = mockProposals.filter(p => p.status === 'pending');
@@ -104,7 +105,7 @@ function GroupProposals({ group, connectedWallet }: GroupProposalsProps) {
                 key={proposal.id}
                 proposal={proposal}
                 group={group}
-                connectedWallet={connectedWallet}
+                connectedWallet={walletAddress}
               />
             ))}
           </div>
@@ -124,7 +125,7 @@ function GroupProposals({ group, connectedWallet }: GroupProposalsProps) {
                 key={proposal.id}
                 proposal={proposal}
                 group={group}
-                connectedWallet={connectedWallet}
+                connectedWallet={walletAddress}
               />
             ))}
           </div>
@@ -141,7 +142,7 @@ function GroupProposals({ group, connectedWallet }: GroupProposalsProps) {
                 key={proposal.id}
                 proposal={proposal}
                 group={group}
-                connectedWallet={connectedWallet}
+                connectedWallet={walletAddress}
               />
             ))}
           </div>

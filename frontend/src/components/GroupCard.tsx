@@ -1,5 +1,5 @@
 import React from 'react';
-import { Users, Shield, Clock, ExternalLink } from 'lucide-react';
+import { Users, Shield, ExternalLink } from 'lucide-react';
 
 interface Group {
   id: string;
@@ -8,8 +8,6 @@ interface Group {
   threshold: number;
   totalMembers: number;
   balance: string;
-  isOwner: boolean;
-  lastActivity: string;
 }
 
 interface GroupCardProps {
@@ -25,11 +23,6 @@ function GroupCard({ group, onView }: GroupCardProps) {
           <h3 className="text-lg font-semibold text-white">{group.name}</h3>
           <p className="text-sm text-gray-400 font-mono">{group.address}</p>
         </div>
-        {group.isOwner && (
-          <span className="bg-cyan-400/10 text-cyan-400 text-xs px-2 py-1 rounded-full">
-            Owner
-          </span>
-        )}
       </div>
 
       <div className="space-y-3 mb-6">
@@ -47,14 +40,6 @@ function GroupCard({ group, onView }: GroupCardProps) {
             <span className="text-sm">Threshold</span>
           </div>
           <span className="text-white font-medium">{group.threshold}/{group.totalMembers}</span>
-        </div>
-
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2 text-gray-400">
-            <Clock className="h-4 w-4" />
-            <span className="text-sm">Last Activity</span>
-          </div>
-          <span className="text-white font-medium">{group.lastActivity}</span>
         </div>
       </div>
 
