@@ -4,7 +4,7 @@ import GroupOverview from './GroupOverview';
 import GroupProposals from './GroupProposals';
 import GroupTransactions from './GroupTransactions';
 import { ArrowLeft } from 'lucide-react';
-import { useWallet } from '../contexts/WalletContext';
+// import { useWallet } from '../contexts/WalletContext';
 
 interface GroupPageProps {
   groupId: string | null;

@@ -2,8 +2,8 @@
 pragma solidity ^0.8.28;
 
 
-import "@account-abstraction/contracts/interfaces/IPaymaster.sol";
-import {PackedUserOperation} from "@account-abstraction/contracts/interfaces/PackedUserOperation.sol";
+import "account-abstraction/interfaces/IPaymaster.sol";
+import {PackedUserOperation} from "account-abstraction/interfaces/PackedUserOperation.sol";
 
 
 contract Paymaster is IPaymaster
